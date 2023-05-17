@@ -15,19 +15,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
     internal class CreateNewMedicalPersonnelViewModel : INotifyPropertyChanged
     {
 
-        private ObservableCollection<Position> _colPosition;
-        public ObservableCollection<Position> ColPosition
-        {
-            get
-            {
-                return _colPosition;
-            }
-            set
-            {
-                _colPosition = value;
-                OnPropertyChanged(nameof(ColPosition));
-            }
-        }
+
 
         private string _surname;
         private string _name;
@@ -99,6 +87,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
             }
         }
         private ObservableCollection<Position> _positions = new ObservableCollection<Position>();
+
 
         public CreateNewMedicalPersonnelViewModel()
         {

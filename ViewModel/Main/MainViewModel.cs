@@ -106,7 +106,21 @@ namespace StamotologicClinic.ViewModel.Main
         }
 
 
-
+        private RelayCommand _updateItem;
+        public RelayCommand UpdateItem
+        {
+            get
+            {
+                return _updateItem ?? new RelayCommand(obj =>
+                {
+                    if(SelectetTabItem.Name == "MedicalPersonalTab" && SelectetMedicalPersonnels != null)
+                    {
+                        _openUpdateMedicalPersonnels();
+                    }
+                }
+                );
+            }
+        }
 
 
         private RelayCommand _deleteItem;
