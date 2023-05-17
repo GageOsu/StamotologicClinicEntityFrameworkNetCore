@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StamotologicClinic.View.AuthorizationView
+namespace StamotologicClinic.View.CRUDView.CRUDMedicalPersonnelsView
 {
     /// <summary>
-    /// Логика взаимодействия для AuthorizationView.xaml
+    /// Логика взаимодействия для AddNewMedicalPersonnelsView.xaml
     /// </summary>
-    public partial class AuthorizationView : Window
+    public partial class AddNewMedicalPersonnelsView : Window
     {
-        public AuthorizationView()
+        public AddNewMedicalPersonnelsView()
         {
             InitializeComponent();
         }

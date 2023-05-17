@@ -1,12 +1,29 @@
-﻿<Window x:Class="StamotologicClinic.MainWindow"
+﻿<Window x:Class="StamotologicClinic.View.AuthorizationView.AuthorizationView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StamotologicClinic"
+        xmlns:local="clr-namespace:StamotologicClinic.View.AuthorizationView"
+        xmlns:vm="clr-namespace:StamotologicClinic.ViewModel.AuthorizationViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="AuthorizationView" Height="150" Width="300">
+    <Window.DataContext>
+        <vm:AuthorizationViewModel/>
+    </Window.DataContext>
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="Логин:"/>
+        <TextBox Text="{Binding Login}"  MaxLength="50" Grid.Row="0" Grid.Column="1"/>
+        <TextBox Text="{Binding Password}"  MaxLength="50"  Grid.Row="1" Grid.Column="1" Margin="0,0,0,20" Grid.RowSpan="2"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Пароль:"/>
+        <Button Command="{Binding LoginCommand}" Grid.Row="2" Grid.Column="1" Content="Войти"/>
     </Grid>
 </Window>

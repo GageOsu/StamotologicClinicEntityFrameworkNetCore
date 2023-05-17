@@ -1,0 +1,74 @@
+﻿<Window x:Class="StamotologicClinic.View.MainView.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StamotologicClinic.View.MainView"
+        xmlns:vm="clr-namespace:StamotologicClinic.ViewModel.Main"
+        mc:Ignorable="d"
+        Title="MainView" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Menu Height="19" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Добавить">
+                    <MenuItem Header="Новый Сотрудник" Command="{Binding OpenCreateNewMedicalPersonnel}"/>
+                    <MenuItem Header="Новый Пациент"/>
+                </MenuItem>
+                <MenuItem Header="Open Project"/>
+                <MenuItem Header="Open Project"/>
+                <MenuItem Header="Open Project"/>
+                <MenuItem Header="Open Project"/>
+                <Separator/>
+                <MenuItem Header="Exit" ></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl Margin="0,19,0,0" SelectedItem="{Binding SelectetTabItem}">
+            <TabItem Name="AccauntsTab">
+                <TabItem.Header>
+                    <TextBlock Text="Пользователи"/>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Name="PatientsTab">
+                <TabItem.Header>
+                    <TextBlock Text="Пациенты"/>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Name="MedicalPersonalTab">
+                <TabItem.Header>
+                    <TextBlock Text="Медицинский персонал"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирова"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllMedicalPersonnels" ItemsSource="{Binding AllMedicalPersonnels}"
+                          SelectedItem="{Binding SelectetMedicalPersonnels}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Surname}" Header="Фамилия"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Имя"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=MiddleName}" Header="Отчество"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalPersonnelsPosition.Position1}" Header="Должность"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </TabItem>
+            <TabItem Name="ServicesTab">
+                <TabItem.Header>
+                    <TextBlock Text="Услуги"/>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Name="ReportTab">
+                <TabItem.Header>
+                    <TextBlock Text="Отчет"/>
+                </TabItem.Header>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

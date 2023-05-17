@@ -1,5 +1,7 @@
-﻿using System;
+﻿using StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewModel;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StamotologicClinic.Models;
 
@@ -20,4 +22,13 @@ public partial class MedicalPersonnel
     public virtual Position? IdpositionNavigation { get; set; }
 
     public virtual ICollection<RecordHistory> RecordHistories { get; set; } = new List<RecordHistory>();
+
+    [NotMapped]
+    public Position MedicalPersonnelsPosition
+    {
+        get
+        {
+            return ReadMedicalPersonnelsViewModel.GetPositionById((int)Idposition);
+        }
+    }
 }

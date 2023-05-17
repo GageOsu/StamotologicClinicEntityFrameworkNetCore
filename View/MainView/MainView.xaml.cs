@@ -12,16 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StamotologicClinic.View.AuthorizationView
+namespace StamotologicClinic.View.MainView
 {
     /// <summary>
-    /// Логика взаимодействия для AuthorizationView.xaml
+    /// Логика взаимодействия для MainView.xaml
     /// </summary>
-    public partial class AuthorizationView : Window
+
+    
+    public partial class MainView : Window
     {
-        public AuthorizationView()
+        public static ListView AllMedicalPersonnelsView;
+        public MainView()
         {
             InitializeComponent();
+
+            AllMedicalPersonnelsView = ViewAllMedicalPersonnels;
         }
     }
 }
