@@ -1,6 +1,7 @@
 ﻿using StamotologicClinic.Models;
 using StamotologicClinic.ViewModel.Command;
 using StamotologicClinic.ViewModel.CRUDViewModel.CRUDPosition;
+using StamotologicClinic.ViewModel.Main;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewModel
 {
@@ -19,6 +21,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
         private string _middlename;
         private Position _position;
         private ObservableCollection<Position> _positions = new ObservableCollection<Position>();
+        public MedicalPersonnel MedicalSelectedItem { get; set; }
         public string Name
         {
             get
@@ -85,24 +88,23 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
 
         public UpdateNewMedicalPersonnelsVewModel()
         {
+            MedicalSelectedItem = MainViewModel.SelectetMedicalPersonnels;
             foreach (var item in ReadPositionViewModel.AllPosition())
             {
                 _positions.Add(item);
             }
-
         }
-
-        public bool UpdateMedicalPersonnels(MedicalPersonnel OldMedicalPersonal, string NewName, string NewSurname, string MewMiddleName, Position newPosition)
+        public bool UpdateMedicalPersonnels(MedicalPersonnel personnel,  Position newPosition)
         {
             bool result = false;
             using (StomatologicClinicContext db = new StomatologicClinicContext())
             {
-                MedicalPersonnel medicalPersonnels = db.MedicalPersonnels.FirstOrDefault(p => p.IdmedicalPersonnel == OldMedicalPersonal.IdmedicalPersonnel);
+                MedicalPersonnel medicalPersonnels = db.MedicalPersonnels.FirstOrDefault(p => p.IdmedicalPersonnel == personnel.IdmedicalPersonnel);
                 {
-                    medicalPersonnels.Surname = NewSurname;
-                    medicalPersonnels.Name = NewName;
-                    medicalPersonnels.MiddleName = MewMiddleName;
-                    medicalPersonnels.Idposition = newPosition.Idposition;
+                    medicalPersonnels.Surname = personnel.Surname;
+                    medicalPersonnels.Name = personnel.Name;
+                    medicalPersonnels.MiddleName = personnel.MiddleName;
+                    medicalPersonnels.Idposition = personnel.Idposition;
                     db.SaveChanges();
                     result = true;
                 }
@@ -111,6 +113,18 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
         }
 
 
+        private RelayCommand _updateMedicalPesonel;
+        public RelayCommand UpdateMedicalPesonel
+        {
+            get
+            {
+                return _updateMedicalPesonel ?? new RelayCommand(obj =>
+                {
+                    UpdateMedicalPersonnels(MedicalSelectedItem, Position);
+                }
+                );
+            }
+        }
 
 
 

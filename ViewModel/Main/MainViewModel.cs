@@ -23,6 +23,15 @@ namespace StamotologicClinic.ViewModel.Main
 {
     internal class MainViewModel : INotifyPropertyChanged
     {
+        private static MedicalPersonnel _selectetMedicalPersonnels;
+        public static MedicalPersonnel SelectetMedicalPersonnels
+        {
+            get { return _selectetMedicalPersonnels; }
+            set
+            {
+                _selectetMedicalPersonnels = value;
+            }
+        }
         private ObservableCollection<Position> _positions = new ObservableCollection<Position>();
         public ObservableCollection<Position> Positions
         {
@@ -38,7 +47,6 @@ namespace StamotologicClinic.ViewModel.Main
         }
 
         public TabItem SelectetTabItem { get; set; }
-        public MedicalPersonnel SelectetMedicalPersonnels { get; set; }
 
        public MainViewModel()
        {

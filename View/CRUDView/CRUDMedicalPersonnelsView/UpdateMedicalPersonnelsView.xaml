@@ -20,14 +20,14 @@
                     VerticalAlignment="Center"
                     Width="200">
             <TextBlock Text="Фамилия"/>
-            <TextBox Text="{Binding Surname}"/>
+            <TextBox Text="{Binding MedicalSelectedItem.Surname}"/>
             <TextBlock Text="Имя"/>
-            <TextBox Text="{Binding Name}"/>
+            <TextBox Text="{Binding MedicalSelectedItem.Name}"/>
             <TextBlock Text="Отчество"/>
-            <TextBox Text="{Binding Middlename}"/>
+            <TextBox Text="{Binding MedicalSelectedItem.MiddleName}"/>
             <TextBlock Text="Должность"/>
             <ComboBox ItemsSource="{Binding Positions}" DisplayMemberPath="Position1" SelectedItem="{Binding Position}"/>
         </StackPanel>
-        <Button Grid.Row="1" Content="Изменить"/>
+        <Button Grid.Row="1" Content="Изменить" Command="{Binding UpdateMedicalPesonel}"/>
     </Grid>
 </Window>
