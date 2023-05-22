@@ -22,6 +22,8 @@ using StamotologicClinic.ViewModel.CRUDViewModel.CRUDPatientsAddressesViewModel;
 using StamotologicClinic.View.CRUDView.CRUDPatientsAddressesView;
 using StamotologicClinic.View.CRUDView.CRUDCategoriesView;
 using StamotologicClinic.ViewModel.CRUDViewModel.CRUDCategoriesViewModel;
+using StamotologicClinic.ViewModel.CRUDViewModel.CRUDTypeServicesViewModel;
+using StamotologicClinic.ViewModel.CRUDViewModel.CRUDRecordHistory;
 
 namespace StamotologicClinic.ViewModel.Main
 {
@@ -77,6 +79,34 @@ namespace StamotologicClinic.ViewModel.Main
        }
 
         #region Вывод Таблиц
+        private List<RecordHistory> _allRecordHistory = ReadRecordHistoryViewModel.GetAllRecordHistory();
+        public List<RecordHistory> AllRecordHistory
+        {
+            get
+            {
+                return _allRecordHistory;
+            }
+            set
+            {
+                _allRecordHistory = value;
+                OnPropertyChanged(nameof(AllRecordHistory));
+            }
+        }
+
+        private List<TypeService> _allTypeService = ReadTypeServicesViewModel.GetAllTypeService();
+        public List<TypeService> AllTypeService
+        {
+            get
+            {
+                return _allTypeService;
+            }
+            set
+            {
+                _allTypeService = value;
+                OnPropertyChanged(nameof(AllTypeService));
+            }
+        }
+
         private List<Category> _allCategories = ReadCategoriesViewModel.GetCategories();
         public List<Category> AllCategories 
         {

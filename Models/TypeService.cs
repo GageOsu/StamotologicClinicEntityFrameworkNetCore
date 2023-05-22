@@ -1,5 +1,7 @@
-﻿using System;
+﻿using StamotologicClinic.ViewModel.CRUDViewModel.CRUDCategoriesViewModel;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StamotologicClinic.Models;
 
@@ -20,4 +22,13 @@ public partial class TypeService
     public virtual ICollection<PriceHistory> PriceHistories { get; set; } = new List<PriceHistory>();
 
     public virtual ICollection<RecordHistory> RecordHistories { get; set; } = new List<RecordHistory>();
+
+    [NotMapped]
+    public Category CategoriesPosition
+    {
+        get
+        {
+            return ReadCategoriesViewModel.GetCategoriesById((int)Idcategory);
+        }
+    }
 }

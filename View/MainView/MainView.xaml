@@ -28,11 +28,7 @@
             </MenuItem>
         </Menu>
         <TabControl Margin="0,19,0,0" SelectedItem="{Binding SelectetTabItem}">
-            <TabItem Name="AccauntsTab">
-                <TabItem.Header>
-                    <TextBlock Text="Пользователи"/>
-                </TabItem.Header>
-            </TabItem>
+
             <TabItem Name="PatientsTab">
                 <TabItem.Header>
                     <TextBlock Text="Пациенты"/>
@@ -86,12 +82,47 @@
                 <TabItem.Header>
                     <TextBlock Text="Услуги"/>
                 </TabItem.Header>
-                
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирова" Command="{Binding UpdateItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllTypeSerices" ItemsSource="{Binding AllTypeService}"
+                          SelectedItem="{Binding SelectedMedicalPersonnels}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=CategoriesPosition.Category1}" Header="Категория"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DescriptionService}" Header="Услуга"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Цена"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </TabItem>
+            
             <TabItem Name="ReportTab">
                 <TabItem.Header>
                     <TextBlock Text="Отчет"/>
                 </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирова" Command="{Binding UpdateItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllRecord" ItemsSource="{Binding AllRecordHistory}"
+                          SelectedItem="{Binding SelectedMedicalPersonnels}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=IdmedicalPersonal}" Header="id1"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Idpatient}" Header="id2"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Idservice}" Header="id3"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateRegistration}" Header="id4"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateСompletion}" Header="id5"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Idservice}" Header="id6"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </TabItem>
 
             <TabItem Name="CategoriesTab">

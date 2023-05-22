@@ -15,5 +15,13 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDCategoriesViewModel
             var result = db.Categories.ToList();
             return result;
         }
+        public static Category GetCategoriesById(int id)
+        {
+            using (StomatologicClinicContext db = new StomatologicClinicContext())
+            {
+                Category pos = db.Categories.FirstOrDefault(p => p.Idcategory == id);
+                return pos;
+            }
+        }
     }
 }
