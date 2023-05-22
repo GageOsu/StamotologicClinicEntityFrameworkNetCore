@@ -17,6 +17,7 @@
                     <MenuItem Header="Новый Сотрудник" Command="{Binding OpenCreateNewMedicalPersonnel}"/>
                     <MenuItem Header="Новая должность" Command="{Binding OpenCreatePosition}"/>
                     <MenuItem Header="Новый Пациент" Command="{Binding OpenCreatePatientsAddresses}"/>
+                    <MenuItem Header="Новая Категория" Command="{Binding OpenCreateCatigories}"/>
                 </MenuItem>
                 <MenuItem Header="Open Project"/>
                 <MenuItem Header="Open Project"/>
@@ -85,13 +86,36 @@
                 <TabItem.Header>
                     <TextBlock Text="Услуги"/>
                 </TabItem.Header>
+                
             </TabItem>
             <TabItem Name="ReportTab">
                 <TabItem.Header>
                     <TextBlock Text="Отчет"/>
                 </TabItem.Header>
             </TabItem>
-            
+
+            <TabItem Name="CategoriesTab">
+                <TabItem.Header>
+                    <TextBlock Text="Категории услуг"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирова" Command="{Binding UpdateItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllCategories" ItemsSource="{Binding AllCategories}"
+                          SelectedItem="{Binding SelectedPosition}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Category1}" Header="Категории"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        
+        
+
             <TabItem Name="PositionTab">
                 <TabItem.Header>
                     <TextBlock Text="Должности"/>

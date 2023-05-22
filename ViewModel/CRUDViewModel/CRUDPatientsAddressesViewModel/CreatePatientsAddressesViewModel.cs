@@ -1,4 +1,6 @@
-﻿using StamotologicClinic.Models;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using StamotologicClinic.Models;
 using StamotologicClinic.ViewModel.Command;
 using System;
 using System.Collections.Generic;
@@ -224,12 +226,12 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDPatientsAddressesViewMo
                     };
                     db.Patients.Add(newPatient);
                     db.SaveChanges();
-
-                    result = true;
                 }
                 return result;
-            }
+    }
         }
+
+
 
         private RelayCommand _newPatientsAdresses;
         public RelayCommand NewPatientsAdresses
