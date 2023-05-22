@@ -1,0 +1,53 @@
+﻿<Window x:Class="StamotologicClinic.View.CRUDView.CRUDPatientsAddressesView.CreatePatientsAddressesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StamotologicClinic.View.CRUDView.CRUDPatientsAddressesView"
+        xmlns:vm="clr-namespace:StamotologicClinic.ViewModel.CRUDViewModel.CRUDPatientsAddressesViewModel"
+        mc:Ignorable="d"
+        Title="CreatePatientsAddressesView" Height="590" Width="300">
+    <Window.DataContext>
+        <vm:CreatePatientsAddressesViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="200">
+            <TextBlock Text="Контактные данные"/>
+            <TextBlock Text="Фамилия"/>
+            <TextBox Text="{Binding Surname}"/>
+            <TextBlock Text="Имя"/>
+            <TextBox Text="{Binding Name}"/>
+            <TextBlock Text="Отчество"/>
+            <TextBox Text="{Binding MiddleName}"/>
+            <TextBlock Text="Пол"/>
+            <TextBox Text="{Binding Sex}"/>
+            <TextBlock Text="Страховая компания"/>
+            <TextBox Text="{Binding InsuranceCompany}"/>
+            <TextBlock Text="Полис ОМС"/>
+            <TextBox Text="{Binding MHIPolice}"/>
+            <TextBlock Text="Номер телефона"/>
+            <TextBox Text="{Binding PhoneNumber}"/>
+            <TextBlock Text="Адрес"/>
+            <TextBlock Text="Субъект"/>
+            <TextBox Text="{Binding Subject}"/>
+            <TextBlock Text="Район"/>
+            <TextBox Text="{Binding District}"/>
+            <TextBlock Text="Город"/>
+            <TextBox Text="{Binding City}"/>
+            <TextBlock Text="Населенный пункт"/>
+            <TextBox Text="{Binding Locality}"/>
+            <TextBlock Text="Улица"/>
+            <TextBox Text="{Binding Street}"/>
+            <TextBlock Text="Дом"/>
+            <TextBox Text="{Binding House}"/>
+        </StackPanel>
+        <Button Command="{Binding NewPatientsAdresses}" Grid.Row="1" Content="Новая запись"/>
+    </Grid>
+</Window>

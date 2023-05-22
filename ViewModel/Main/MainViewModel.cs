@@ -18,6 +18,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using StamotologicClinic.View.CRUDView.CRUDPositionsView;
+using StamotologicClinic.ViewModel.CRUDViewModel.CRUDPatientsAddressesViewModel;
+using StamotologicClinic.View.CRUDView.CRUDPatientsAddressesView;
 
 namespace StamotologicClinic.ViewModel.Main
 {
@@ -73,6 +75,20 @@ namespace StamotologicClinic.ViewModel.Main
        }
 
         #region Вывод Таблиц
+        private List<Patient> _allPatients = ReadPatientsAdressesViewModel.GetAllPatient();
+        public List<Patient> AllPatients
+        {
+            get
+            {
+                return _allPatients;
+            }
+            set 
+            { 
+                _allPatients = value;
+                OnPropertyChanged(nameof(AllPatients));
+            }
+        }
+
         private List<Position> _allPosition = ReadPositionViewModel.GetPosition();
         public List<Position> AllPosition
         {
@@ -180,6 +196,26 @@ namespace StamotologicClinic.ViewModel.Main
                 return openUpdatePosition ?? new RelayCommand(obj =>
                 {
                     _openUpdatePosition();
+                }
+                );
+            }
+        }
+        #endregion
+
+        #region Открытия CRUD Patients Adresses
+        private void _openCreatePatientsAdresses()
+        {
+            CreatePatientsAddressesView createPatientsAddressesView = new CreatePatientsAddressesView();
+            SetPositionAndOpen(createPatientsAddressesView);
+        }
+        private RelayCommand openCreatePatientsAddresses;
+        public RelayCommand OpenCreatePatientsAddresses
+        {
+            get
+            {
+                return openCreatePatientsAddresses ?? new RelayCommand(obj =>
+                {
+                    _openCreatePatientsAdresses();
                 }
                 );
             }

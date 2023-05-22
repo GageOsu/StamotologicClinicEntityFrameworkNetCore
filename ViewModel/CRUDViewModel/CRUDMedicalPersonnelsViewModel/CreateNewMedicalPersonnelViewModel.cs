@@ -133,7 +133,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
             {
                 return addNewMedicalPesonel ?? new RelayCommand(obj =>
                 {
-                    bool result = true;
+                    bool result = false;
                     if (Name == null || Name.Replace(" ","").Length == 0)
                     {
                         MessageBox.Show("Ошибка");

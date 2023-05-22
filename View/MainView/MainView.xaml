@@ -16,6 +16,7 @@
                 <MenuItem Header="Добавить">
                     <MenuItem Header="Новый Сотрудник" Command="{Binding OpenCreateNewMedicalPersonnel}"/>
                     <MenuItem Header="Новая должность" Command="{Binding OpenCreatePosition}"/>
+                    <MenuItem Header="Новый Пациент" Command="{Binding OpenCreatePatientsAddresses}"/>
                 </MenuItem>
                 <MenuItem Header="Open Project"/>
                 <MenuItem Header="Open Project"/>
@@ -35,6 +36,26 @@
                 <TabItem.Header>
                     <TextBlock Text="Пациенты"/>
                 </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирова" Command="{Binding UpdateItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllPatients" ItemsSource="{Binding AllPatients}"
+                          SelectedItem="">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Surname}" Header="Фамилия"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Имя"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=MiddleName}" Header="Отчество"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Sex}" Header="Пол"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=InsuranceCompany}" Header="Страховая компания"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Mhipolicy}" Header="Полис"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=PhoneNumber}" Header="Номер телефона"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </TabItem>
             
             <TabItem Name="MedicalPersonalTab">
