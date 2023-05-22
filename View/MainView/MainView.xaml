@@ -15,7 +15,7 @@
             <MenuItem Header="File">
                 <MenuItem Header="Добавить">
                     <MenuItem Header="Новый Сотрудник" Command="{Binding OpenCreateNewMedicalPersonnel}"/>
-                    <MenuItem Header="Новый Пациент"/>
+                    <MenuItem Header="Новая должность" Command="{Binding OpenCreatePosition}"/>
                 </MenuItem>
                 <MenuItem Header="Open Project"/>
                 <MenuItem Header="Open Project"/>
@@ -36,6 +36,7 @@
                     <TextBlock Text="Пациенты"/>
                 </TabItem.Header>
             </TabItem>
+            
             <TabItem Name="MedicalPersonalTab">
                 <TabItem.Header>
                     <TextBlock Text="Медицинский персонал"/>
@@ -47,7 +48,7 @@
                     </ContextMenu>
                 </TabItem.ContextMenu>
                 <ListView x:Name="ViewAllMedicalPersonnels" ItemsSource="{Binding AllMedicalPersonnels}"
-                          SelectedItem="{Binding SelectetMedicalPersonnels}">
+                          SelectedItem="{Binding SelectedMedicalPersonnels}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Surname}" Header="Фамилия"/>
@@ -57,8 +58,8 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-
             </TabItem>
+            
             <TabItem Name="ServicesTab">
                 <TabItem.Header>
                     <TextBlock Text="Услуги"/>
@@ -68,6 +69,26 @@
                 <TabItem.Header>
                     <TextBlock Text="Отчет"/>
                 </TabItem.Header>
+            </TabItem>
+            
+            <TabItem Name="PositionTab">
+                <TabItem.Header>
+                    <TextBlock Text="Должности"/>
+                </TabItem.Header>
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактирова" Command="{Binding UpdateItem}"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <ListView x:Name="ViewAllPositions" ItemsSource="{Binding AllPosition}"
+                          SelectedItem="{Binding SelectedPosition}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Position1}" Header="Должности"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </TabItem>
         </TabControl>
     </Grid>

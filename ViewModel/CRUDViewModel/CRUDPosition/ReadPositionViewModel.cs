@@ -9,7 +9,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDPosition
 {
     internal class ReadPositionViewModel
     {
-        public static List<Position> AllPosition()
+        public static List<Position> GetPosition()
         {
             StomatologicClinicContext db = new StomatologicClinicContext();
             var result = db.Positions.ToList();

@@ -1,6 +1,7 @@
 ﻿using StamotologicClinic.Models;
 using StamotologicClinic.ViewModel.Command;
 using StamotologicClinic.ViewModel.CRUDViewModel.CRUDPosition;
+using StamotologicClinic.ViewModel.Main;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -91,7 +92,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
 
         public CreateNewMedicalPersonnelViewModel()
         {
-            foreach (var item in ReadPositionViewModel.AllPosition())
+            foreach (var item in ReadPositionViewModel.GetPosition())
             {
                 _positions.Add(item);
             }
@@ -140,6 +141,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
                     else
                     {
                         result = CreateMedicalPersonnel(Surname, Name, Middlename, Position);
+                        MainViewModel.UpdateAllMedicalPersonnelsView();
                     }
                 }
                 );

@@ -16,22 +16,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using StamotologicClinic.View.CRUDView.CRUDMedicalPersonnelsView;
 using System.Windows.Controls;
+using StamotologicClinic.View.CRUDView.CRUDPositionsView;
 
 namespace StamotologicClinic.ViewModel.Main
 {
     internal class MainViewModel : INotifyPropertyChanged
     {
-        private static MedicalPersonnel _selectetMedicalPersonnels;
-        public static MedicalPersonnel SelectetMedicalPersonnels
+        #region Выбор для редактирования
+        private static MedicalPersonnel _selectedMedicalPersonnels;
+        public static MedicalPersonnel SelectedMedicalPersonnels
         {
-            get { return _selectetMedicalPersonnels; }
+            get { return _selectedMedicalPersonnels; }
             set
             {
-                _selectetMedicalPersonnels = value;
+                _selectedMedicalPersonnels = value;
             }
         }
+
+        private static Position _selectedPosition;
+        public static Position SelectedPosition
+        {
+            get
+            {
+                return _selectedPosition;
+            }
+            set
+            {
+                _selectedPosition = value;
+            }
+        }
+        #endregion
+
         private ObservableCollection<Position> _positions = new ObservableCollection<Position>();
         public ObservableCollection<Position> Positions
         {
@@ -50,11 +66,26 @@ namespace StamotologicClinic.ViewModel.Main
 
        public MainViewModel()
        {
-            foreach (var item in ReadPositionViewModel.AllPosition())
+            foreach (var item in ReadPositionViewModel.GetPosition())
             {
                 _positions.Add(item);
             }
        }
+
+        #region Вывод Таблиц
+        private List<Position> _allPosition = ReadPositionViewModel.GetPosition();
+        public List<Position> AllPosition
+        {
+            get
+            {
+                return _allPosition;
+            }
+            set
+            {
+                _allPosition = value;
+                OnPropertyChanged(nameof(AllPosition));
+            }
+        }
        
         private List<MedicalPersonnel> _allMedicalPersonnels = ReadMedicalPersonnelsViewModel.GetAllMedicalPersonnel();
 
@@ -67,7 +98,9 @@ namespace StamotologicClinic.ViewModel.Main
                 OnPropertyChanged(nameof(AllMedicalPersonnels));
             }
         }
+        #endregion
 
+        #region Открытия окон
         private void SetPositionAndOpen(Window window)
         {
             window.Owner = Application.Current.MainWindow;
@@ -75,7 +108,8 @@ namespace StamotologicClinic.ViewModel.Main
             window.ShowDialog();
         }
 
-        private void _penCreateMedicalPersonnel()
+        #region Открытия CRUD MedicalPersonnels
+        private void _openCreateMedicalPersonnel()
         {
             AddNewMedicalPersonnelsView addNewMedicalPersonnelView = new AddNewMedicalPersonnelsView();
             SetPositionAndOpen(addNewMedicalPersonnelView);
@@ -88,7 +122,7 @@ namespace StamotologicClinic.ViewModel.Main
             {
                 return openCreateNewMedicalPersonnel ?? new RelayCommand(obj =>
                 {
-                    _penCreateMedicalPersonnel();
+                    _openCreateMedicalPersonnel();
                 }
                 );
             }
@@ -112,8 +146,48 @@ namespace StamotologicClinic.ViewModel.Main
                 );
             }
         }
+        #endregion
 
+        #region Открытия CRUD Positions
+        private void _openCreatePosition()
+        {
+            CreateNewPositionsView createNewPositionsView = new CreateNewPositionsView();
+            SetPositionAndOpen(createNewPositionsView);
+        }
+        private RelayCommand openCreatePosition;
+        public RelayCommand OpenCreatePosition
+        {
+            get
+            {
+                return openCreatePosition ?? new RelayCommand(obj =>
+                {
+                    _openCreatePosition();
+                }
+                );
+            }
+        }
 
+        private void _openUpdatePosition()
+        {
+            UpdatePositionsView updatePositionsView = new UpdatePositionsView();
+            SetPositionAndOpen(updatePositionsView);
+        }
+        private RelayCommand openUpdatePosition;
+        public RelayCommand OpenUpdatePosition
+        {
+            get
+            {
+                return openUpdatePosition ?? new RelayCommand(obj =>
+                {
+                    _openUpdatePosition();
+                }
+                );
+            }
+        }
+        #endregion
+        #endregion
+
+        #region Редактирования данных
         private RelayCommand _updateItem;
         public RelayCommand UpdateItem
         {
@@ -121,16 +195,21 @@ namespace StamotologicClinic.ViewModel.Main
             {
                 return _updateItem ?? new RelayCommand(obj =>
                 {
-                    if(SelectetTabItem.Name == "MedicalPersonalTab" && SelectetMedicalPersonnels != null)
+                    if(SelectetTabItem.Name == "MedicalPersonalTab" && SelectedMedicalPersonnels != null)
                     {
                         _openUpdateMedicalPersonnels();
+                    }
+                    if(SelectetTabItem.Name == "PositionTab" && SelectedPosition != null)
+                    {
+                        _openUpdatePosition();
                     }
                 }
                 );
             }
         }
+        #endregion
 
-
+        #region Удаления данных
         private RelayCommand _deleteItem;
 
         public RelayCommand DeleteItem
@@ -140,27 +219,41 @@ namespace StamotologicClinic.ViewModel.Main
                 return _deleteItem ?? new RelayCommand(obj =>
                 {
                     bool result = false;
-                    if(SelectetTabItem.Name == "MedicalPersonalTab" && SelectetMedicalPersonnels != null)
+                    if(SelectetTabItem.Name == "MedicalPersonalTab" && SelectedMedicalPersonnels != null)
                     {
-                        result = DeleteMedicalPersonnelsViewModel.DeleteMedicalPersonnels(SelectetMedicalPersonnels);
+                        result = DeleteMedicalPersonnelsViewModel.DeleteMedicalPersonnels(SelectedMedicalPersonnels);
                         UpdateAllMedicalPersonnelsView();
+                    }
+                    if(SelectetTabItem.Name == "PositionTab" && SelectedPosition != null)
+                    {
+                        result = DeletePositionViewModel.DeletePosition(SelectedPosition);
+                        UpdateAllPositionsView();
                     }
 
                 }
                 );
             }
         }
+        #endregion
 
 
-        private void UpdateAllMedicalPersonnelsView()
+        #region Обноввления для вывода таблиц 
+        public static void UpdateAllMedicalPersonnelsView()
         {
-            AllMedicalPersonnels = ReadMedicalPersonnelsViewModel.GetAllMedicalPersonnel();
             MainView.AllMedicalPersonnelsView.ItemsSource = null;
             MainView.AllMedicalPersonnelsView.Items.Clear();
-            MainView.AllMedicalPersonnelsView.ItemsSource = AllMedicalPersonnels;
+            MainView.AllMedicalPersonnelsView.ItemsSource = ReadMedicalPersonnelsViewModel.GetAllMedicalPersonnel();
             MainView.AllMedicalPersonnelsView.Items.Refresh();
         }
 
+        public static void UpdateAllPositionsView()
+        {
+            MainView.AllPositionsView.ItemsSource = null;
+            MainView.AllPositionsView.Items.Clear();
+            MainView.AllPositionsView.ItemsSource = ReadPositionViewModel.GetPosition();
+            MainView.AllPositionsView.Items.Refresh();
+        }
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

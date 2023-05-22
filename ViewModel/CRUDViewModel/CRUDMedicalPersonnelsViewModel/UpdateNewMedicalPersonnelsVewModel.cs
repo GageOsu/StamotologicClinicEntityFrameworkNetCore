@@ -88,13 +88,13 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
 
         public UpdateNewMedicalPersonnelsVewModel()
         {
-            MedicalSelectedItem = MainViewModel.SelectetMedicalPersonnels;
-            foreach (var item in ReadPositionViewModel.AllPosition())
+            MedicalSelectedItem = MainViewModel.SelectedMedicalPersonnels;
+            foreach (var item in ReadPositionViewModel.GetPosition())
             {
                 _positions.Add(item);
             }
         }
-        public bool UpdateMedicalPersonnels(MedicalPersonnel personnel,  Position newPosition)
+        public bool UpdateMedicalPersonnels(MedicalPersonnel personnel)
         {
             bool result = false;
             using (StomatologicClinicContext db = new StomatologicClinicContext())
@@ -120,7 +120,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDMedicalPersonnelsViewMo
             {
                 return _updateMedicalPesonel ?? new RelayCommand(obj =>
                 {
-                    UpdateMedicalPersonnels(MedicalSelectedItem, Position);
+                    UpdateMedicalPersonnels(MedicalSelectedItem);
                 }
                 );
             }

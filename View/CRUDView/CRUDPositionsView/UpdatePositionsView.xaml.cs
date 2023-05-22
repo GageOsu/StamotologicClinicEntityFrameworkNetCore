@@ -12,23 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StamotologicClinic.View.MainView
+namespace StamotologicClinic.View.CRUDView.CRUDPositionsView
 {
     /// <summary>
-    /// Логика взаимодействия для MainView.xaml
+    /// Логика взаимодействия для UpdatePositionsView.xaml
     /// </summary>
-
-    
-    public partial class MainView : Window
+    public partial class UpdatePositionsView : Window
     {
-        public static ListView AllMedicalPersonnelsView;
-        public static ListView AllPositionsView;
-        public MainView()
+        public UpdatePositionsView()
         {
             InitializeComponent();
-
-            AllMedicalPersonnelsView = ViewAllMedicalPersonnels;
-            AllPositionsView = ViewAllPositions;
         }
     }
 }
