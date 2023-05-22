@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StamotologicClinic.Models;
 
@@ -11,9 +12,11 @@ using StamotologicClinic.Models;
 namespace StamotologicClinic.Migrations
 {
     [DbContext(typeof(StomatologicClinicContext))]
-    partial class StomatologicClinicContextModelSnapshot : ModelSnapshot
+    [Migration("20230522220423_Test4")]
+    partial class Test4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,9 +285,6 @@ namespace StamotologicClinic.Migrations
                         .HasColumnName("IDRecord");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idrecord"));
-
-                    b.Property<int?>("Count")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("DateRegistration")
                         .HasColumnType("date");

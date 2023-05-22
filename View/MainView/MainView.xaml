@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StamotologicClinic.View.MainView"
         xmlns:vm="clr-namespace:StamotologicClinic.ViewModel.Main"
         mc:Ignorable="d"
-        Title="MainView" Height="450" Width="800">
+        Title="Учет Стамотологической клиники" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
@@ -114,12 +114,17 @@
                           SelectedItem="{Binding SelectedMedicalPersonnels}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=IdmedicalPersonal}" Header="id1"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Idpatient}" Header="id2"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Idservice}" Header="id3"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateRegistration}" Header="id4"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateСompletion}" Header="id5"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Idservice}" Header="id6"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=PatientId.Surname}" Header="Фамилия пациента"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=PatientId.Name}" Header="Имя пациента"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=PatientId.MiddleName}" Header="Отчество пациента"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalPersonnelsPosition.Surname}" Header="Фамилия врача"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalPersonnelsPosition.Name}" Header="Имя врача"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=MedicalPersonnelsPosition.MiddleName}" Header="Отчество врача"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=TypeServiceId.DescriptionService}" Header="Описание врача"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Count}" Header="Колличество оказаной услуги"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateRegistration}" Header="Дата регистрации"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=DateСompletion}" Header="Дата выполения"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=Status}" Header="Статус"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -12,8 +12,8 @@ using StamotologicClinic.Models;
 namespace StamotologicClinic.Migrations
 {
     [DbContext(typeof(StomatologicClinicContext))]
-    [Migration("20230522212614_UpdateTable")]
-    partial class UpdateTable
+    [Migration("20230522220709_Test6")]
+    partial class Test6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -286,6 +286,9 @@ namespace StamotologicClinic.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idrecord"));
 
+                    b.Property<int?>("Count")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DateRegistration")
                         .HasColumnType("date");
 
@@ -304,8 +307,8 @@ namespace StamotologicClinic.Migrations
                         .HasColumnType("int")
                         .HasColumnName("IDService");
 
-                    b.Property<bool?>("Status")
-                        .HasColumnType("bit");
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Idrecord");
 

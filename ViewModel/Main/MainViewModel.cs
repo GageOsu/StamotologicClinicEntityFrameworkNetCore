@@ -68,6 +68,7 @@ namespace StamotologicClinic.ViewModel.Main
             }
         }
 
+
         public TabItem SelectetTabItem { get; set; }
 
        public MainViewModel()
