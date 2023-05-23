@@ -23,12 +23,14 @@ namespace StamotologicClinic.View.MainView
     {
         public static ListView AllMedicalPersonnelsView;
         public static ListView AllPositionsView;
+        public static ListView AllCategories;
         public MainView()
         {
             InitializeComponent();
 
             AllMedicalPersonnelsView = ViewAllMedicalPersonnels;
             AllPositionsView = ViewAllPositions;
+            AllCategories = ViewAllCategories;
         }
     }
 }

@@ -141,7 +141,7 @@
                     </ContextMenu>
                 </TabItem.ContextMenu>
                 <ListView x:Name="ViewAllCategories" ItemsSource="{Binding AllCategories}"
-                          SelectedItem="{Binding SelectedPosition}">
+                          SelectedItem="{Binding SelectedCategories}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Path=Category1}" Header="Категории"/>

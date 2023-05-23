@@ -30,6 +30,12 @@ namespace StamotologicClinic.ViewModel.Main
     internal class MainViewModel : INotifyPropertyChanged
     {
         #region Выбор для редактирования
+        private static Category _selectedCategories;
+        public static Category SelectedCategories
+        {
+            get { return _selectedCategories; }
+            set { _selectedCategories = value; }
+        }
         private static MedicalPersonnel _selectedMedicalPersonnels;
         public static MedicalPersonnel SelectedMedicalPersonnels
         {
@@ -268,8 +274,8 @@ namespace StamotologicClinic.ViewModel.Main
         }
         #endregion
 
-        #region
-        private void _openCreateCatigories()
+        #region Открытия CRUD Categories
+        private void _openCreateCategories()
         {
             CreateCategoriesView createCategoriesView = new CreateCategoriesView();
             SetPositionAndOpen(createCategoriesView);
@@ -282,9 +288,27 @@ namespace StamotologicClinic.ViewModel.Main
             {
                 return openCreateCatigories ?? new RelayCommand(obj =>
                 {
-                    _openCreateCatigories();
+                    _openCreateCategories();
                 }
                 );
+            }
+        }
+
+        private void _openUpdateCategories()
+        {
+            UpdateCategoriesView updateCategoriesView = new UpdateCategoriesView();
+            SetPositionAndOpen(updateCategoriesView);
+        }
+
+        private RelayCommand openUpdateCategoriesAdresses;
+        public RelayCommand OpenUpdateCategoriesAdresses
+        {
+            get
+            {
+                return openCreateCatigories ?? new RelayCommand(obj =>
+                {
+                    _openUpdateCategories();
+                });
             }
         }
         #endregion
@@ -305,6 +329,10 @@ namespace StamotologicClinic.ViewModel.Main
                     if(SelectetTabItem.Name == "PositionTab" && SelectedPosition != null)
                     {
                         _openUpdatePosition();
+                    }
+                    if(SelectetTabItem.Name == "CategoriesTab" && SelectedCategories != null)
+                    {
+                        _openUpdateCategories();   
                     }
                 }
                 );
@@ -332,6 +360,11 @@ namespace StamotologicClinic.ViewModel.Main
                         result = DeletePositionViewModel.DeletePosition(SelectedPosition);
                         UpdateAllPositionsView();
                     }
+                    if(SelectetTabItem.Name == "CategoriesTab" && SelectedCategories != null)
+                    {
+                        result = DeleteCategoriesViewModel.DeleteCategories(SelectedCategories);
+                        UpdateAllCategoriesView();
+                    }
 
                 }
                 );
@@ -355,6 +388,13 @@ namespace StamotologicClinic.ViewModel.Main
             MainView.AllPositionsView.Items.Clear();
             MainView.AllPositionsView.ItemsSource = ReadPositionViewModel.GetPosition();
             MainView.AllPositionsView.Items.Refresh();
+        }
+        public static void UpdateAllCategoriesView()
+        {
+            MainView.AllCategories.ItemsSource = null;
+            MainView.AllCategories.Items.Clear();
+            MainView.AllCategories.ItemsSource = ReadCategoriesViewModel.GetCategories();
+            MainView.AllCategories.Items.Refresh();
         }
         #endregion
 

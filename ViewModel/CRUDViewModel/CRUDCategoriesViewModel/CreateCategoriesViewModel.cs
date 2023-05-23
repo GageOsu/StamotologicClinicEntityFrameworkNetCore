@@ -1,5 +1,6 @@
 ﻿using StamotologicClinic.Models;
 using StamotologicClinic.ViewModel.Command;
+using StamotologicClinic.ViewModel.Main;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,6 +63,7 @@ namespace StamotologicClinic.ViewModel.CRUDViewModel.CRUDCategoriesViewModel
                     else
                     {
                         result = CreateCategories(Category);
+                        MainViewModel.UpdateAllCategoriesView();
                     }
                 }
                 );
